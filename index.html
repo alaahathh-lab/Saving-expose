@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>تيليبرومبتر – الادخار</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--fg:#1d1d1f;--mut:#6b6b73;--line:#e3e0d8;--gold:#9a6b00;--blue:#0b63b8;--red:#c2312d;--hl:#fff4cf;--hb:rgba(255,255,255,.88);--fs:30px;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0f12;--card:#17191e;--fg:#f1f1f3;--mut:#9a9ca6;--line:#262932;--gold:#ffd24d;--blue:#6cb8ff;--red:#ff8a80;--hl:#2a2410;--hb:rgba(14,15,18,.88);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e0f12;--card:#17191e;--fg:#f1f1f3;--mut:#9a9ca6;--line:#262932;--gold:#ffd24d;--blue:#6cb8ff;--red:#ff8a80;--hl:#2a2410;--hb:rgba(14,15,18,.88);color-scheme:dark}
+html{scroll-padding-top:150px;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Tajawal,system-ui,sans-serif;-webkit-font-smoothing:antialiased;padding-bottom:150px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hb);z-index:10}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);right:0;height:3px;width:0;background:linear-gradient(to left,var(--gold),var(--blue));z-index:30}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--hb);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:10px 14px 8px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+h1{font-size:17px;margin:0;font-weight:800;color:var(--blue);line-height:1.3}
+.sub{font-size:12.5px;color:var(--mut);margin-top:2px}
+.ico{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:inherit;font-size:18px;display:grid;place-items:center;cursor:pointer;flex:none}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;min-width:38px;height:34px;padding:0 12px;border-radius:17px;border:1px solid var(--line);background:var(--card);color:var(--mut);font:700 14px Tajawal,sans-serif;cursor:pointer}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+main{max-width:720px;margin:0 auto;padding:16px 14px}
+section{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 18px 22px;margin-bottom:16px;border-right:5px solid var(--gold)}
+section:nth-child(even){border-right-color:var(--blue)}
+.tag{display:inline-block;font-size:13px;font-weight:700;color:var(--mut);margin-bottom:4px}
+h2{font-size:21px;margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid var(--line);font-weight:800;color:var(--gold);line-height:1.4}
+section:nth-child(even) h2{color:var(--blue)}
+p{margin:0 0 1.1em;font-size:var(--fs);line-height:1.9;font-weight:500}
+p:last-child{margin:0}
+b{font-weight:800;color:var(--blue)}
+mark{background:var(--hl);color:var(--gold);font-weight:800;border-radius:6px;padding:0 5px}
+em{font-style:normal;font-weight:800;color:var(--red)}
+.fin{text-align:center;color:var(--mut);font-size:14px;padding:6px 0 20px}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--hb);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px))}
+.row{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:10px}
+#play{width:60px;height:60px;border-radius:50%;border:0;background:var(--blue);color:#fff;font-size:24px;display:grid;place-items:center;cursor:pointer;flex:none;box-shadow:0 6px 18px rgba(11,99,184,.35)}
+.ctl{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
+.ctl label{font-size:12px;color:var(--mut);font-weight:700;display:flex;justify-content:space-between}
+input[type=range]{width:100%;height:28px;accent-color:var(--blue);margin:0}
+.fs{display:flex;gap:8px;flex:none}
+.fs .ico{font-weight:800;font-family:Tajawal,sans-serif}
+#wl{display:none;font-size:11px;font-weight:700;color:#1f9d55;background:rgba(31,157,85,.12);padding:4px 9px;border-radius:12px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header>
+  <div class="top">
+    <div>
+      <h1>إكسبوزي الاقتصاد العام – الادخار</h1>
+      <div class="sub">المتحدث: هتهوت علاء الدين · Group B4</div>
+    </div>
+    <span id="wl">● الشاشة نشطة</span>
+    <button class="ico" id="theme" aria-label="تغيير المظهر">◐</button>
+  </div>
+  <nav class="chips" id="chips"></nav>
+</header>
+
+<main id="main">
+<section><span class="tag">1</span><h2>الشريحة 1 و 2: المقدمة والإشكالية</h2>
+<p>السلام عليكم أستاذ، وزملائي الكرام. اليوم إن شاء الله البريزونتاسيون تاعنا راح تكون على موضوع يمسنا كامل ويمس الاقتصاد بصفة عامة، لي هو <mark>“الادخار” (L’épargne / Savings)</mark>.</p>
+<p>كامل موالفين نسمعو بكلمة “نخبي دورو لزمان العقوبة”، بصح في الاقتصاد الكلي (Macroéconomie)، هاد الكلمة عندها وزن كبير بزاف. في هاد الإكسبوزي راح نجاوبو على إشكالية أساسية: واشنو هو الادخار أصلًا؟ كيفاش نقدرو نفرقو بينو وبين الاستثمار والثروة؟ وواشنو هو الدور الفعال تاعو في تحريك عجلة النمو الاقتصادي؟</p></section>
+
+<section><span class="tag">2</span><h2>الشريحة 3: تعريف الادخار</h2>
+<p>باش نبداو على أساس صحيح، نعطيو تعريف ساهل. الادخار بكل بساطة هو داك الجزء من الدخل المتاح (Revenu disponible) لي ما نصرفوهش في الاستهلاك (Consommation) تاع كل يوم.</p>
+<p>يعني، الدخل تاع أي واحد فينا ينقسم على زوج: جزء يروح للاستهلاك باش نعيشو، وجزء نخبيوه للمستقبل. المعادلة واضحة: <mark>الادخار = الدخل المتاح ناقص الاستهلاك</mark>.</p>
+<p>على سبيل المثال: إنسان يخلص 5 ملاين (50,000 دج)، يصرف 4 ملاين في الماكلة واللبسة والكرا، المليون لي يبقى هداك هو الادخار.</p></section>
+
+<section><span class="tag">3</span><h2>الشريحة 4 و 5: الادخار مقابل الثروة والاستثمار</h2>
+<p>هنا لازم نوضحو زوج صوالح يغلطو فيهم الناس بزاف:</p>
+<p><b>أولاً، الفرق بين الادخار والثروة (Wealth):</b> الادخار هو عملية نديروها كل شهر (يعني تدفق / Flux)، بصح الثروة هي واش تلملك كاع مع الوقت (يعني رصيد / Stock). كي تدخر مليون كل شهر، هادوك الملاين مع الوقت يولو ثروة.</p>
+<p><b>ثانياً، الفرق بين الادخار والاستثمار (Investment):</b> كي تخبي دراهمك في الدار ولا في البانكة بلا ما يخدمو، هادا ادخار.. الهدف تاعو هو الأمان برك. بصح كي تشد هادوك الدراهم وتشري بيهم أسهم ولا تحل بيهم بروجي باش يجيبولك أرباح، هنا يولي استثمار. الاستثمار يخلق ثروة جديدة، بصح الادخار يحافظ عليها برك.</p></section>
+
+<section><span class="tag">4</span><h2>الشريحة 6: الادخار والاستهلاك</h2>
+<p>العلاقة بين الاستهلاك والادخار هي <em>علاقة عكسية</em>. الدخل تاعنا محدود، تسمى إذا زدنا في الاستهلاك وبدينا نصرفو كثر، الادخار راح ينقص أوتوماتيكيا، والعكس صحيح.</p>
+<p>في الاقتصاد، لازم دايما نلقاو التوازن (Le juste milieu). ما نقدروش نصرفو كلش وما نخموش في غدوا، وفي نفس الوقت ما نقدروش نحرمو رواحنا من كلش باش نخبو. الاختيار بيناتهم هو في الحقيقة اختيار بين إشباع رغبة تاع دروك (في الحاضر)، ولا نأجلوها للمستقبل باش نكونو مرتاحين.</p></section>
+
+<section><span class="tag">5</span><h2>الشريحة 7: أنواع الادخار</h2>
+<p>شكون لي يدخر في الاقتصاد؟ عندنا 3 فاعلين أساسيين:</p>
+<p><b>1. ادخار العائلات والأفراد (Ménages):</b> كيما أي واحد فينا ولا والدينا كي يخبو دراهمهم.</p>
+<p><b>2. ادخار المؤسسات (Entreprises):</b> الشركات كي يربحو، ما يوزعوش كاع الأرباح على المساهمين، يخبو جزء باش يطورو بيه الشركة تاعهم ويشرو ماتريال جديد (Les bénéfices non distribués).</p>
+<p><b>3. الادخار العمومي (Public):</b> الدولة تاني تدخر.. وقتاش؟ كي تكون الإيرادات تاعها (كيما الضرائب) كثر من النفقات والمصاريف تاعها. هنا يولي عندنا فائض، وهادا يتسمى ادخار عمومي.</p></section>
+
+<section><span class="tag">6</span><h2>الشريحة 8: وسائل الادخار</h2>
+<p>كيفاش نقدرو نخبو دراهمنا؟</p>
+<p>كاين لي يخلي دراهمو كاش (Liquide) في الدار، هادي وسيلة ساهلة بصح مافيهاش أرباح، وتقدر تروح قيمتها إذا صرا تضخم (Inflation).</p>
+<p>وكاين لي يحطهم في البانكة في حساب توفير (Compte d’épargne)، هنا الأمان طالع وتدي شوية فايدة.</p>
+<p>وكاين لي يدير ودائع لأجل (Dépôts à terme)، يعني تبلوكي دراهمك لعام ولا عامين في البانكة ما تمسهمش، باش تدي عليهم نسبة فايدة كبر.</p></section>
+
+<section><span class="tag">7</span><h2>الشريحة 9: العوامل المؤثرة</h2>
+<p>واشنو هي الصوالح لي تخلينا ندخرو كثر ولا قل؟</p>
+<p>أول حاجة، <b>“مستوى الدخل”:</b> باينة بلي لي يخلص مليح يقدر يخبي كثر من لي يخلص شوية.</p>
+<p>ثانيا، <b>“سعر الفائدة” (Taux d’intérêt):</b> كي البانكة تطلع نسبة الفايدة، الناس تتشجع باش تحط دراهمها وتخبي.</p>
+<p>ثالثا، <b>“التضخم” (Inflation):</b> كي الأسعار تزيد غالية، القدرة الشرائية تطيح، تسمى الناس تولي تصرف كثر باش تعيش، والادخار ينقص.</p>
+<p>ورابعا، <b>“التوقعات المستقبلية”:</b> كي الناس تخاف من أزمة اقتصادية ولا تخمم في التقاعد، يولوا يخبو كثر كإجراء احتياطي (Épargne de précaution).</p></section>
+
+<section><span class="tag">8</span><h2>الشريحة 10 و 11: الأهمية على المستوى الجزئي</h2>
+<p>على المستوى الجزئي (Micro-économie)، الادخار مهم بزاف لينا كأفراد. يعطينا <mark>“الأمان المالي”</mark> باش نواجهو أي حاجة طارئة غير متوقعة (مرض، بان تاع طوموبيل..)، ويعاونا باش نحققو أهدافنا كيما نشرو دار ولا طوموبيل بلا ما نطيحو في فخ الكريديات والديون لي تهلك الميزانية.</p>
+<p>وبالنسبة للشركات الصغيرة، الادخار يضمنلهم سيولة يواجهو بيها الأزمات بلا ما يعلنو إفلاسهم.</p></section>
+
+<section><span class="tag">9</span><h2>الشريحة 12 و 13: الأهمية على المستوى الكلي والنمو</h2>
+<p>دروك نوصلو لقلب الموضوع تاع الموديل تاعنا (Macro-économie). <b>الادخار هو الموطور (المحرك) تاع النمو الاقتصادي!</b> كيفاش؟</p>
+<p>تخيلو معايا الدورة: الأفراد يحطو مدخراتهم في البنوك.. البنوك تجمع هادوك الدراهم وتسلفهم للشركات (قروض للاستثمار).. الشركات بهادوك الدراهم يبنو مصانع ويشرو آلات ويخلقو مناصب شغل.</p>
+<p>تسمى السلسلة هي: <mark>ادخار ← تمويل ← استثمار ← نمو اقتصادي (Croissance économique)</mark>. بلا ادخار، البنوك ما تلقاش واش تسلف، والاستثمار يحبس.</p></section>
+
+<section><span class="tag">10</span><h2>الشريحة 14 و 15: مفارقة الادخار والخاتمة</h2>
+<p>في الأخير، كاين ظاهرة اقتصادية شابة اسمها <em>“مفارقة الادخار” (Le paradoxe de l’épargne)</em> لي هدر عليها العالم كينز (Keynes). هاد المفارقة تقولك: “الادخار مليح للفرد، بصح كون كاع المجتمع يقرر يخبي دراهمو في دقة وحدة ويحبسو الاستهلاك، واش يصرا؟”</p>
+<p>الشركات ماراحش يلقاو شكون يشري سلعتهم.. الإنتاج ينقص.. الشركات تغلق وتسرح الخدامين.. والنتيجة: أزمة اقتصادية وبطالة!</p>
+<p>تسمى الدرس لي نخرجوا بيه كخلاصة: <mark>الادخار ضروري باش نمولو الاستثمار، بصح لازم دايما يكون متوازن مع الاستهلاك باش الاقتصاد يبقى يدور.</mark></p>
+<p>يعطيكم الصحة على الاستماع، وإذا كاين أي كستيون (سؤال)، تفضلو.</p></section>
+<div class="fin">— النهاية —</div>
+</main>
+
+<div class="dock"><div class="row">
+  <button id="play" aria-label="تشغيل / إيقاف">▶</button>
+  <div class="ctl"><label><span>السرعة</span><span id="sv">3</span></label>
+    <input type="range" id="speed" min="1" max="10" value="3"></div>
+  <div class="fs"><button class="ico" id="fm" aria-label="تصغير الخط">أ−</button><button class="ico" id="fp" aria-label="تكبير الخط">أ+</button></div>
+</div></div>
+
+<script>
+const $=id=>document.getElementById(id),root=document.documentElement;
+const secs=[...document.querySelectorAll('section')],chips=$('chips');
+const st={fs:30,sp:3,th:''};
+try{Object.assign(st,JSON.parse(localStorage.getItem('tp')||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem('tp',JSON.stringify(st))}catch(e){}};
+function applyFs(){root.style.setProperty('--fs',st.fs+'px')}
+function applyTheme(){st.th?root.setAttribute('data-theme',st.th):root.removeAttribute('data-theme')}
+applyFs();applyTheme();$('speed').value=st.sp;$('sv').textContent=st.sp;
+
+secs.forEach((s,i)=>{const b=document.createElement('button');b.className='chip';b.textContent=i+1;
+ b.onclick=()=>{pause();window.scrollTo({top:s.offsetTop-chips.parentElement.offsetHeight-8,behavior:'smooth'})};chips.appendChild(b)});
+
+$('fp').onclick=()=>{st.fs=Math.min(52,st.fs+2);applyFs();save()};
+$('fm').onclick=()=>{st.fs=Math.max(20,st.fs-2);applyFs();save()};
+$('speed').oninput=e=>{st.sp=+e.target.value;$('sv').textContent=st.sp;save()};
+$('theme').onclick=()=>{const dark=root.getAttribute('data-theme')==='dark'||(!root.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);st.th=dark?'light':'dark';applyTheme();save()};
+
+let run=false,last=0,acc=0,wl=null;
+async function lock(){try{if('wakeLock' in navigator){wl=await navigator.wakeLock.request('screen');$('wl').style.display='block';wl.addEventListener('release',()=>$('wl').style.display='none')}}catch(e){}}
+function frame(t){if(!run)return;const dt=Math.min(.05,(t-last)/1000);last=t;acc+=st.sp*14*dt;
+ if(acc>=1){const n=Math.floor(acc);acc-=n;window.scrollBy(0,n)}
+ if(innerHeight+scrollY>=document.documentElement.scrollHeight-2){pause();return}
+ requestAnimationFrame(frame)}
+function play(){run=true;$('play').textContent='❚❚';last=performance.now();lock();requestAnimationFrame(frame)}
+function pause(){run=false;$('play').textContent='▶'}
+$('play').onclick=()=>run?pause():play();
+addEventListener('touchstart',e=>{if(run&&!e.target.closest('.dock'))pause()},{passive:true});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&run)lock()});
+
+const bar=$('bar');
+function onScroll(){const h=document.documentElement.scrollHeight-innerHeight;bar.style.width=(h>0?scrollY/h*100:0)+'%';
+ const y=scrollY+innerHeight*.35;let k=0;secs.forEach((s,i)=>{if(s.offsetTop<=y)k=i});
+ [...chips.children].forEach((c,i)=>{const on=i===k;if(on!==c.classList.contains('on')){c.classList.toggle('on',on);if(on)chips.scrollTo({left:c.offsetLeft-chips.clientWidth/2+c.clientWidth/2,behavior:'smooth'})}})}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+</script>
+</body>
+</html>
