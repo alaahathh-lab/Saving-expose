@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>إكسبوزي الاقتصاد العام - الادخار</title>
+    
+    <!-- تحميل خط تجوال -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- تحميل Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- إعدادات Tailwind المخصصة -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        darkBg: '#121212',
+                        cardBg: '#1e1e1e',
+                        primaryText: '#e0e0e0',
+                        accentGold: '#ffd700',
+                        accentBlue: '#4dabf7'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            -webkit-font-smoothing: antialiased;
+            /* منع تحديد النص لتجنب التحديد الخاطئ أثناء التمرير */
+            user-select: none; 
+        }
+
+        /* تنسيق شريط التقدم */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to left, #ffd700, #4dabf7);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.2s ease-out;
+        }
+
+        /* تنسيق مخصص للنصوص لتكون مقروءة بوضوح */
+        .teleprompter-text {
+            font-size: 1.5rem; /* حجم كبير مناسب للقراءة من الهاتف */
+            line-height: 1.85; /* تباعد مريح بين الأسطر */
+            font-weight: 500;
+        }
+
+        /* تخصيص زر العودة للأعلى */
+        #scrollTopBtn {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+            transform: translateY(20px);
+        }
+        #scrollTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased pb-24">
+
+    <!-- شريط التقدم -->
+    <div id="progress-bar"></div>
+
+    <!-- الهيدر الثابت -->
+    <header class="sticky top-0 z-50 bg-darkBg/85 backdrop-blur-md border-b border-gray-800 py-4 px-4 shadow-lg flex justify-between items-center">
+        <div>
+            <h1 class="text-xl md:text-2xl font-bold text-accentBlue mb-1">
+                إكسبوزي الاقتصاد العام - الادخار
+            </h1>
+            <p class="text-sm md:text-base text-gray-400 font-medium">
+                المتحدث: هتهوت علاء الدين (Group B4)
+            </p>
+        </div>
+        <!-- مؤشر منع انطفاء الشاشة -->
+        <div id="wakeLockStatus" class="hidden flex items-center gap-2 bg-green-900/30 text-green-400 px-3 py-1.5 rounded-full text-xs font-bold border border-green-800/50">
+            <svg class="w-4 h-4 animate-pulse" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM9 11V5h2v6H9zm0 4v-2h2v2H9z"></path></svg>
+            الشاشة نشطة
+        </div>
+    </header>
+
+    <!-- المحتوى (البطاقات) -->
+    <main class="max-w-3xl mx-auto px-4 mt-6 space-y-6">
+
+        <!-- Card 1 -->
+        <div class="bg-cardBg rounded-2xl p-6 border-r-4 border-accentGold shadow-xl relative">
+            <h2 class="text-2xl font-bold text-accentGold mb-4 pb-3 border-b border-gray-700/50">
+                الشريحة 1 و 2: المقدمة والإشكالية
+            </h2>
+            <div class="teleprompter-text text-primaryText">
+                السلام عليكم أستاذ، وزملائي الكرام. اليوم إن شاء الله البريزونتاسيون تاعنا راح تكون على موضوع يمسنا كامل ويمس الاقتصاد بصفة عامة، لي هو <span class="text-accentBlue font-bold">'الادخار' (L'épargne / Savings)</span>.<br><br>
+                كامل موالفين نسمعو بكلمة 'نخبي دورو لزمان العقوبة'، بصح في الاقتصاد الكلي (Macroéconomie)، هاد الكلمة عندها وزن كبير بزاف. في هاد الإكسبوزي راح نجاوبو على إشكالية أساسية: واشنو هو الادخار أصلًا؟ كيفاش نقدرو نفرقو بينو وبين الاستثمار والثروة؟ وواشنو هو الدور الفعال تاعو في تحريك عجلة النمو الاقتصادي؟
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-cardBg rounded-2xl p-6 border-r-4 border-accentBlue shadow-xl relative">
+            <h2 class="text-2xl font-bold text-accentBlue mb-4 pb-3 border-b border-gray-700/50">
+                الشريحة 3: تعريف الادخار
+            </h2>
+            <div class="teleprompter-text text-primaryText">
+                باش نبداو على أساس صحيح، نعطيو تعريف ساهل. الادخار بكل بساطة هو داك الجزء من الدخل المتاح (Revenu disponible) لي ما نصرفوهش في الاستهلاك (Consommation) تاع كل يوم.<br><br>
+                يعني، الدخل تاع أي واحد فينا ينقسم على زوج: جزء يروح للاستهلاك باش نعيشو، وجزء نخبيوه للمستقبل. المعادلة واضحة: <span class="text-accentGold font-bold">(الادخار = الدخل المتاح ناقص الاستهلاك)</span>.<br><br>
+                على سبيل المثال: إنسان يخلص 5 ملاين (50,000 دج)، يصرف 4 ملاين في الماكلة واللبسة والكرا، المليون لي يبقى هداك هو الادخار.
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-cardBg rounded-2xl p-6 border-r-4 border-accentGold shadow-xl relative">
+            <h2 class="text-2xl font-bold text-accentGold mb-4 pb-3 border-b border-gray-700/50">
+                الشريحة 4 و 5: الادخار مقابل الثروة والاستثمار
+            </h2>
+            <div class="teleprompter-text text-primaryText">
+                هنا لازم نوضحو زوج صوالح يغلطو فيهم الناس بزاف:<br><br>
+                <span class="text-accentBlue font-bold">أولاً، الفرق بين الادخار والثروة (Wealth):</span> الادخار هو عملية نديروها كل شهر (يعني تدفق / Flux)، بصح الثروة هي واش تلملك كاع مع الوقت (يعني رصيد / Stock). كي تدخر مليون كل شهر، هادوك الملاين مع الوقت يولو ثروة.<br><br>
+                <span class="text-accentBlue font-bold">ثانياً، الفرق بين الادخار والاستثمار (Investment):</span> كي تخبي دراهمك في الدار ولا في البانكة بلا ما يخدمو، هادا ادخار.. الهدف تاعو هو الأمان برك. بصح كي تشد هادوك الدراهم وتشري بيهم أسهم ولا تحل بيهم بروجي باش يجيبولك أرباح، هنا يولي استثمار. الاستثمار يخلق ثروة جديدة، بصح الادخار يحافظ عليها برك.
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-cardBg rounded-2xl p-6 border-r-4 border-accentBlue shadow-xl relative">
+            <h2 class="text-2xl font-bold text-accentBlue mb-4 pb-3 border-b border-gray-700/50">
+                الشريحة 6: الادخار والاستهلاك
+            </h2>
+            <div class="teleprompter-text text-primaryText">
+                العلاقة بين الاستهلاك والادخار هي <span class="text-red-400 font-bold">علاقة عكسية</span>. الدخل تاعنا محدود، تسمى إذا زدنا في الاستهلاك وبدينا نصرفو كثر، الادخار راح ينقص أوتوماتيكيا، والعكس صحيح.<br><br>
+                في الاقتصاد، لازم دايما نلقاو التوازن (Le juste milieu). ما نقدروش نصرفو كلش وما نخموش في غدوا، وفي نفس الوقت ما نقدروش نحرمو رواحنا من كلش باش نخبو. الاختيار بيناتهم هو في الحقيقة اختيار بين إشباع رغبة تاع دروك (في الحاضر)، ولا نأجلوها للمستقبل باش نكونو مرتاحين.
+            </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="bg-cardBg rounded-2xl p-6 border-r-4 border-accentGold shadow-xl relative">
+            <h2 class="text-2xl font-bold text-accentGold mb-4 pb-3 border-b border-gray-700/50">
+                الشريحة 7: أنواع الادخار
+            </h2>
+            <div class="teleprompter-text text-primaryText">
+                شكون لي يدخر في الاقتصاد؟ عندنا 3 فاعلين أساسيين:<br><br>
+                <span class="text-accentBlue font-bold">1. ادخار العائلات والأفراد (Ménages):</span> كيما أي واحد فينا ولا والدينا كي يخبو دراهمهم.<br><br>
+                <span class="text-accentBlue font-bold">2. ادخار المؤسسات (Entreprises):</span> الشركات كي يربحو، ما يوزعوش كاع الأرباح على المساهمين، يخبو جزء باش يطورو بيه الشركة تاعهم ويشرو ماتريال جديد (Les bénéfices non distribués).<br><br>
+                <span class="text-accentBlue font-bold">3. الادخار العمومي (Public):</span> الدولة تاني تدخر.. وقتاش؟ كي تكون الإيرادات تاعها (كيما الضرائب) كثر من النفقات والمصاريف تاعها. هنا يولي عندنا فائض، وهادا يتسمى ادخار عمومي.
+            </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="bg-cardBg rounded-2xl p-6 border-r-4 border-accentBlue shadow-xl relative">
+            <h2 class="text-2xl font-bold text-accentBlue mb-4 pb-3 border-b border-gray-700/50">
+                الشريحة 8: وسائل الادخار
+            </h2>
+            <div class="teleprompter-text text-primaryText">
+                كيفاش نقدرو نخبو دراهمنا؟<br><br>
+                كاين لي يخلي دراهمو كاش (Liquide) في الدار، هادي وسيلة ساهلة بصح مافيهاش أرباح، وتقدر تروح قيمتها إذا صرا تضخم (Inflation).<br><br>
+                وكاين لي يحطهم في البانكة في حساب توفير (Compte d'épargne)، هنا الأمان طالع وتدي شوية فايدة.<br><br>
+                وكاين لي يدير ودائع لأجل (Dépôts à terme)، يعني تبلوكي دراهمك لعام ولا عامين في البانكة ما تمسهمش، باش تدي عليهم نسبة فايدة كبر.
+            </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="bg-cardBg rounded-2xl p-6 border-r-4 border-accentGold shadow-xl relative">
+            <h2 class="text-2xl font-bold text-accentGold mb-4 pb-3 border-b border-gray-700/50">
+                الشريحة 9: العوامل المؤثرة
+            </h2>
+            <div class="teleprompter-text text-primaryText">
+                واشنو هي الصوالح لي تخلينا ندخرو كثر ولا قل؟<br><br>
+                أول حاجة، <span class="text-accentBlue font-bold">'مستوى الدخل':</span> باينة بلي لي يخلص مليح يقدر يخبي كثر من لي يخلص شوية.<br>
+                ثانيا، <span class="text-accentBlue font-bold">'سعر الفائدة' (Taux d'intérêt):</span> كي البانكة تطلع نسبة الفايدة، الناس تتشجع باش تحط دراهمها وتخبي.<br>
+                ثالثا، <span class="text-accentBlue font-bold">'التضخم' (Inflation):</span> كي الأسعار تزيد غالية، القدرة الشرائية تطيح، تسمى الناس تولي تصرف كثر باش تعيش، والادخار ينقص.<br>
+                ورابعا، <span class="text-accentBlue font-bold">'التوقعات المستقبلية':</span> كي الناس تخاف من أزمة اقتصادية ولا تخمم في التقاعد، يولوا يخبو كثر كإجراء احتياطي (Épargne de précaution).
+            </div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="bg-cardBg rounded-2xl p-6 border-r-4 border-accentBlue shadow-xl relative">
+            <h2 class="text-2xl font-bold text-accentBlue mb-4 pb-3 border-b border-gray-700/50">
+                الشريحة 10 و 11: الأهمية على المستوى الجزئي
+            </h2>
+            <div class="teleprompter-text text-primaryText">
+                على المستوى الجزئي (Micro-économie)، الادخار مهم بزاف لينا كأفراد. يعطينا <span class="text-accentGold font-bold">'الأمان المالي'</span> باش نواجهو أي حاجة طارئة غير متوقعة (مرض، بان تاع طوموبيل..)، ويعاونا باش نحققو أهدافنا كيما نشرو دار ولا طوموبيل بلا ما نطيحو في فخ الكريديات والديون لي تهلك الميزانية.<br><br>
+                وبالنسبة للشركات الصغيرة، الادخار يضمنلهم سيولة يواجهو بيها الأزمات بلا ما يعلنو إفلاسهم.
+            </div>
+        </div>
+
+        <!-- Card 9 -->
+        <div class="bg-cardBg rounded-2xl p-6 border-r-4 border-accentGold shadow-xl relative">
+            <h2 class="text-2xl font-bold text-accentGold mb-4 pb-3 border-b border-gray-700/50">
+                الشريحة 12 و 13: الأهمية على المستوى الكلي والنمو
+            </h2>
+            <div class="teleprompter-text text-primaryText">
+                دروك نوصلو لقلب الموضوع تاع الموديل تاعنا (Macro-économie). <span class="text-accentBlue font-bold">الادخار هو الموطور (المحرك) تاع النمو الاقتصادي!</span> كيفاش؟<br><br>
+                تخيلو معايا الدورة: الأفراد يحطو مدخراتهم في البنوك.. البنوك تجمع هادوك الدراهم وتسلفهم للشركات (قروض للاستثمار).. الشركات بهادوك الدراهم يبنو مصانع ويشرو آلات ويخلقو مناصب شغل.<br><br>
+                تسمى السلسلة هي: <span class="text-accentGold font-bold">ادخار ← تمويل ← استثمار ← نمو اقتصادي (Croissance économique)</span>. بلا ادخار، البنوك ما تلقاش واش تسلف، والاستثمار يحبس.
+            </div>
+        </div>
+
+        <!-- Card 10 -->
+        <div class="bg-cardBg rounded-2xl p-6 border-r-4 border-accentBlue shadow-xl relative">
+            <h2 class="text-2xl font-bold text-accentBlue mb-4 pb-3 border-b border-gray-700/50">
+                الشريحة 14 و 15: مفارقة الادخار والخاتمة
+            </h2>
+            <div class="teleprompter-text text-primaryText">
+                في الأخير، كاين ظاهرة اقتصادية شابة اسمها <span class="text-red-400 font-bold">'مفارقة الادخار' (Le paradoxe de l'épargne)</span> لي هدر عليها العالم كينز (Keynes). هاد المفارقة تقولك: 'الادخار مليح للفرد، بصح كون كاع المجتمع يقرر يخبي دراهمو في دقة وحدة ويحبسو الاستهلاك، واش يصرا؟'<br><br>
+                الشركات ماراحش يلقاو شكون يشري سلعتهم.. الإنتاج ينقص.. الشركات تغلق وتسرح الخدامين.. والنتيجة: أزمة اقتصادية وبطالة!<br><br>
+                تسمى الدرس لي نخرجوا بيه كخلاصة: <span class="text-accentGold font-bold">الادخار ضروري باش نمولو الاستثمار، بصح لازم دايما يكون متوازن مع الاستهلاك باش الاقتصاد يبقى يدور.</span><br><br>
+                يعطيكم الصحة على الاستماع، وإذا كاين أي كستيون (سؤال)، تفضلو.
+            </div>
+        </div>
+
+    </main>
+
+    <!-- زر العودة للأعلى -->
+    <button id="scrollTopBtn" onclick="scrollToTop()" class="fixed bottom-6 left-6 bg-accentBlue hover:bg-blue-400 text-white p-4 rounded-full shadow-2xl z-50 cursor-pointer border border-blue-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+
+    <script>
+        // --- ميزة إبقاء الشاشة مضاءة (Wake Lock API) ---
+        let wakeLock = null;
+        const wakeLockStatus = document.getElementById('wakeLockStatus');
+
+        const requestWakeLock = async () => {
+            try {
+                if ('wakeLock' in navigator) {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                    wakeLockStatus.classList.remove('hidden'); // إظهار مؤشر نشاط الشاشة
+                    
+                    wakeLock.addEventListener('release', () => {
+                        wakeLockStatus.classList.add('hidden');
+                    });
+                }
+            } catch (err) {
+                console.log(`Wake Lock error: ${err.name}, ${err.message}`);
+            }
+        };
+
+        // طلب إبقاء الشاشة مضاءة عند النقر في أي مكان لأول مرة (متطلب أمني للمتصفحات)
+        document.addEventListener('click', requestWakeLock, { once: true });
+        // محاولة الطلب مباشرة (قد تنجح في بعض المتصفحات بدون تفاعل)
+        requestWakeLock();
+
+
+        // --- شريط التقدم وزر العودة للأعلى ---
+        const progressBar = document.getElementById('progress-bar');
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+        window.onscroll = function() {
+            // تحديث شريط التقدم
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + "%";
+
+            // إظهار/إخفاء زر العودة للأعلى
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollTopBtn.classList.add("show");
+            } else {
+                scrollTopBtn.classList.remove("show");
+            }
+        };
+
+        // دالة التمرير السلس للأعلى
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
